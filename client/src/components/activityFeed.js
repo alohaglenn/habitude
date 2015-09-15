@@ -1,30 +1,48 @@
-var Activities = React.createClass({
-		giveKudos: function(){ // method gets fires on button-click
-		$.ajax({
+// var Activities = React.createClass({
+// 		giveKudos: function(update_id){ // method gets fires on button-click
+// 		console.log('is there a fucking update id?',update_id)
+//     $.ajax({
+//       url: '/api/giveKudos',
+//       type: 'PUT',   
+//       contentType: 'application/json',
+//       dataType: 'json',
+//       success: function(data) { // IDK why no success msg sent but in console success message from db-query
+//       	this.setState({data:data})
+//     	console.log('successful thumbs up')
+//       }.bind(this),
+//       error: function(xhr, status, err) {
+//         console.error(this.props.url, status, err.toString());
+//       }.bind(this)
+//     });
+// 	},
+
+// 	render: function(){
+//     return (
+//     	<div >
+// 	  		<button type="submit" onClick={this.giveKudos.bind(this,update_id)}>THUMBS UP</button>
+//       </div>
+//     ) 
+//   }
+// })
+
+var ActivityFeed = React.createClass({ //parent component
+  giveKudos: function(update_id){ // method gets fires on button-click
+   console.log('is there a fucking update id?',update_id)
+    $.ajax({
       url: '/api/giveKudos',
-      type: 'PUT',   
-      contentType: 'application/json',
+      type: 'POST',   
+      // contentType: 'json',
       dataType: 'json',
       success: function(data) { // IDK why no success msg sent but in console success message from db-query
-      	this.setState({data:data})
-    	console.log('successful thumbs up')
+        console.log('wtf is the data',data)
+       this.setState({data:data})
+     console.log('successful thumbs up')
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
       }.bind(this)
     });
-	},
-
-	render: function(){
-    return (
-    	<div >
-	  		<button type="submit" onClick={this.giveKudos.bind(this)}>THUMBS UP</button>
-      </div>
-    ) 
-  }
-})
-
-var ActivityFeed = React.createClass({ //parent component
+   },
 	loadActivitiesFromServer: function() {
     console.log('inside ajax call')
     $.ajax({
@@ -60,8 +78,8 @@ var ActivityFeed = React.createClass({ //parent component
         
         	<table><tbody>
             <tr>
-              <td>{activity.username+': '+activity.habit+' at '+activity.update_time}</td>
-              <td><Activities/></td>
+              <td>{activity.username+': '+activity.habit+' at '+activity.update_time+', count: '+activity.count}</td>
+              <td><button type="submit" onClick={this.giveKudos.bind(this,activity.update_id)}>THUMBS UP</button></td>
             </tr>
           </tbody></table>
         </div> );

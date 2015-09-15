@@ -226,9 +226,12 @@ module.exports = function(app){
   });
 // VY and GLENN request for give kudos/increment the update's kudos_count
 // hardcoded for update with update_id = 1
-  app.put('/api/giveKudos', function(req, res){
+  app.post('/api/giveKudos', function(req, res){
+    console.log('hello?????????????',req.body);
+    var update_id = req.body.update_id;
     pg.connect(databaseURL, function(err, client, done){
-      var query = client.query('UPDATE updates SET kudos_count = kudos_count + 1 WHERE update_id = 1;');
+      // var query = client.query("UPDATE updates SET kudos_count = kudos_count + 1 WHERE update_id = " + update_id + ";");
+      var query = client.query("UPDATE updates SET kudos_count = kudos_count + 1 WHERE update_id = 1;");
       done();
       var rows = [];
       if(err){
