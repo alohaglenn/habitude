@@ -33,6 +33,8 @@ var ProfilePicture = React.createClass({
               <img className="img-circle" src={'http://i.imgur.com/eWVQuDJ.png'} />
               <h4>{this.state.username}</h4>
               <p>{this.state.location}</p>
+              <h5> </h5>
+              <p>Hi! I’m looking to get more active this Fall with cycling and running. Looking for a group of cool cats who are into similar habits. Happy habituding!</p>
                <div className="panel-body">
                   <div className="expandable expandable-indicator-white expandable-trigger">
               <div className="expandable-content">
